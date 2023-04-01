@@ -3,7 +3,7 @@ const {getFiles,getFile,deleteFile,postFile} = require('../controllers/filesCont
 const multer = require('multer')
 const path = require('path');
 
-const UPLOAD_PATH = path.join('../public/uploads');
+const UPLOAD_PATH = path.join(__dirname,'..','public','uploads'); // define upload directory
 
 // Multer configuration for upload
 const upload = multer({
@@ -16,6 +16,7 @@ router.route('/')
     })
 
     .post(upload.single('file'),async (req,res) => {
+        console.log("File: ",req.file)
         return await postFile(req,res)
     })
 
